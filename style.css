@@ -60,3 +60,203 @@ button:hover {
   text-align: left;
   color: #333;
 }
+
+#prestamosInfo {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #7e57c2;
+}
+
+#prestamosInfo h3 {
+  color: #4a148c;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+#listaPrestamos {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+#listaPrestamos li {
+  background: #ede7f6;
+  margin-bottom: 10px;
+  padding: 12px 10px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(126, 87, 194, 0.07);
+}
+
+.prestamo-info {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #333;
+}
+
+.btnPagarCuota {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 4px;
+  align-self: flex-end;
+  transition: background 0.2s;
+}
+
+.btnPagarCuota:hover {
+  background-color: #388e3c;
+}
+
+#prestamosInfo p {
+  margin: 10px 0;
+  line-height: 1.5;
+  white-space: pre-line;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+#capacidadPrestamo {
+  font-weight: bold;
+  color: #4a148c;
+  background-color: #e8eaf6;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* Sistema de notificaciones */
+.notificacion {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  max-width: 300px;
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.notificacion.mostrar {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.notificacion.exito {
+  background-color: #4caf50;
+  border-left: 4px solid #2e7d32;
+}
+
+.notificacion.error {
+  background-color: #f44336;
+  border-left: 4px solid #c62828;
+}
+
+.notificacion.info {
+  background-color: #2196f3;
+  border-left: 4px solid #1565c0;
+}
+
+/* Modal de préstamo */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(76, 61, 109, 0.25);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  margin: 8% auto;
+  padding: 30px 28px 18px 28px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 8px 32px rgba(76, 61, 109, 0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.close {
+  color: #7e57c2;
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.close:hover {
+  color: #4a148c;
+}
+
+#formPrestamo label {
+  font-weight: 500;
+  margin-top: 8px;
+  color: #4a148c;
+  display: block;
+}
+#formPrestamo input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0 12px 0;
+  border: 1px solid #b39ddb;
+  border-radius: 6px;
+  font-size: 15px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+#btnSolicitarPrestamo {
+  background-color: #7e57c2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#btnSolicitarPrestamo:hover {
+  background-color: #4a148c;
+}
+#btnCancelarPrestamo {
+  background-color: #e0e0e0;
+  color: #4a148c;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#btnCancelarPrestamo:hover {
+  background-color: #bdbdbd;
+}

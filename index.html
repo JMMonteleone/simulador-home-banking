@@ -24,10 +24,36 @@
       <button id="btnDepositar">Depositar</button>
       <button id="btnRetirar">Retirar</button>
     </div>
+    <button id="btnPrestamo">Solicitar Préstamo</button>
     <button id="btnMovimientos">Ver movimientos</button>
     <button id="btnSalir">Salir</button>
     <div id="movimientos"></div>
+    <div id="prestamosInfo" style="display:none;">
+      <h3>Préstamos Activos</h3>
+      <ul id="listaPrestamos"></ul>
+      <p id="capacidadPrestamo"></p>
+    </div>
   </div>
+
+  <div id="prestamoModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="cerrarModal" class="close">&times;</span>
+      <h2>Solicitar Préstamo</h2>
+      <form id="formPrestamo">
+        <label for="montoPrestamo">Monto ($1,000 - $50,000):</label>
+        <input type="number" id="montoPrestamo" min="1000" max="50000" required />
+        <label for="plazoPrestamo">Plazo (meses, 6 - 60):</label>
+        <input type="number" id="plazoPrestamo" min="6" max="60" required />
+        <div class="modal-buttons">
+          <button type="submit" id="btnSolicitarPrestamo">Solicitar</button>
+          <button type="button" id="btnCancelarPrestamo">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sistema de notificaciones -->
+  <div id="notificacion" class="notificacion"></div>
 
   <script src="main.js"></script>
 </body>
