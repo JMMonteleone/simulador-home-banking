@@ -22,7 +22,6 @@ function Usuario(nombre, saldoInicial) {
   };
 
   this.solicitarPrestamo = function(monto, plazoMeses) {
-    // Validar monto mínimo y máximo
     if (monto < 1000 || monto > 50000) {
       return { exito: false, mensaje: "El monto debe estar entre $1,000 y $50,000" };
     }
@@ -32,20 +31,17 @@ function Usuario(nombre, saldoInicial) {
       return { exito: false, mensaje: "El plazo debe estar entre 6 y 60 meses" };
     }
 
-    // Calcular capacidad de préstamo (máximo 3 veces el saldo actual)
     const capacidadMaxima = this.saldo * 3;
     if (monto > capacidadMaxima) {
       return { exito: false, mensaje: `Monto excede la capacidad máxima de $${capacidadMaxima.toFixed(2)}` };
     }
 
-    // Calcular interés (5% anual)
     const tasaInteres = 0.05;
     const interesAnual = monto * tasaInteres;
     const interesTotal = interesAnual * (plazoMeses / 12);
     const montoTotal = monto + interesTotal;
     const cuotaMensual = montoTotal / plazoMeses;
 
-    // Crear objeto préstamo
     const prestamo = {
       id: Date.now(),
       monto: monto,
@@ -61,7 +57,7 @@ function Usuario(nombre, saldoInicial) {
     };
 
     this.prestamos.push(prestamo);
-    this.saldo += monto; // El préstamo se acredita al saldo
+    this.saldo += monto; 
     this.movimientos.push(`+ Préstamo aprobado: $${monto.toFixed(2)} (${plazoMeses} meses)`);
     this.guardarEnStorage();
 
@@ -131,15 +127,13 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
   notificacion.textContent = mensaje;
   notificacion.className = `notificacion ${tipo}`;
   
-  // Mostrar la notificación
   setTimeout(() => {
     notificacion.classList.add('mostrar');
   }, 100);
   
-  // Ocultar la notificación después de 3 segundos
   setTimeout(() => {
     notificacion.classList.remove('mostrar');
-    // Limpiar completamente después de la animación
+  
     setTimeout(() => {
       notificacion.textContent = '';
       notificacion.className = 'notificacion';
@@ -227,7 +221,7 @@ function mostrarPrestamos() {
         `Saldo pendiente: $${prestamo.saldoPendiente.toFixed(2)}<br>` +
         `Fecha: ${prestamo.fechaSolicitud}`;
       li.appendChild(info);
-      // Botón para pagar cuota
+    
       const btnPagar = document.createElement("button");
       btnPagar.textContent = "Pagar cuota";
       btnPagar.className = "btnPagarCuota";
@@ -241,7 +235,7 @@ function mostrarPrestamos() {
           mostrarNotificacion(resultado.mensaje, "error");
         }
       };
-      // Solo mostrar botón si el préstamo está activo y quedan cuotas
+
       if (prestamo.activo && prestamo.cuotasPagadas < prestamo.plazoMeses) {
         li.appendChild(btnPagar);
       }
@@ -251,10 +245,6 @@ function mostrarPrestamos() {
   capacidadPrestamoP.textContent = `Capacidad máxima de préstamo: $${capacidad.toFixed(2)}`;
   prestamosInfoDiv.style.display = "block";
 }
-
-// Eliminar función solicitarPrestamo con prompt (ya no se usa)
-
-// Eventos
 
 btnLogin.addEventListener("click", () => {
   const usuario = usuarioInput.value.trim();
@@ -305,14 +295,15 @@ btnRetirar.addEventListener("click", () => {
   mostrarNotificacion(`Retiro exitoso: $${monto.toFixed(2)}`, "exito");
 });
 
-// Abrir modal préstamo
+
 btnPrestamo.addEventListener("click", () => {
   montoPrestamo.value = "";
   plazoPrestamo.value = "";
   prestamoModal.style.display = "flex";
   montoPrestamo.focus();
 });
-// Cerrar modal préstamo
+
+
 cerrarModal.onclick = btnCancelarPrestamo.onclick = function() {
   prestamoModal.style.display = "none";
 };
@@ -321,7 +312,7 @@ window.onclick = function(event) {
     prestamoModal.style.display = "none";
   }
 };
-// Procesar solicitud de préstamo desde el modal
+
 formPrestamo.onsubmit = function(e) {
   e.preventDefault();
   const monto = parseFloat(montoPrestamo.value);
