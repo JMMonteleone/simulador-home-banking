@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "cliente",
+    "contrasena": "1234",
+    "saldo": 10000,
+    "movimientos": [],
+    "prestamos": []
+  },
+  {
+    "nombre": "usuario2",
+    "contrasena": "abcd",
+    "saldo": 5000,
+    "movimientos": [],
+    "prestamos": []
+  }
+]

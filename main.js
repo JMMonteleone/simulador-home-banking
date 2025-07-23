@@ -1,4 +1,3 @@
-// Función constructora
 function Usuario(nombre, saldoInicial) {
   this.nombre = nombre;
   this.saldo = saldoInicial;
@@ -26,7 +25,6 @@ function Usuario(nombre, saldoInicial) {
       return { exito: false, mensaje: "El monto debe estar entre $1,000 y $50,000" };
     }
 
-    // Validar plazo
     if (plazoMeses < 6 || plazoMeses > 60) {
       return { exito: false, mensaje: "El plazo debe estar entre 6 y 60 meses" };
     }
@@ -84,7 +82,6 @@ function Usuario(nombre, saldoInicial) {
 
     this.movimientos.push(`- Pago cuota préstamo: $${prestamo.cuotaMensual.toFixed(2)}`);
 
-    // Verificar si el préstamo está pagado
     if (prestamo.cuotasPagadas >= prestamo.plazoMeses) {
       prestamo.activo = false;
       this.movimientos.push(`✓ Préstamo finalizado: $${prestamo.monto.toFixed(2)}`);
@@ -126,14 +123,14 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
   const notificacion = document.getElementById('notificacion');
   notificacion.textContent = mensaje;
   notificacion.className = `notificacion ${tipo}`;
-  
+
   setTimeout(() => {
     notificacion.classList.add('mostrar');
   }, 100);
-  
+
   setTimeout(() => {
     notificacion.classList.remove('mostrar');
-  
+
     setTimeout(() => {
       notificacion.textContent = '';
       notificacion.className = 'notificacion';
@@ -141,12 +138,10 @@ function mostrarNotificacion(mensaje, tipo = 'info') {
   }, 3000);
 }
 
-// Variables globales
-const usuarioCorrecto = "cliente";
-const contrasenaCorrecta = "1234";
+// Variables globales y elementos DOM
+let usuarios = [];
 let usuarioActivo = null;
 
-// Elementos DOM
 const loginDiv = document.getElementById("loginDiv");
 const menuDiv = document.getElementById("menuDiv");
 
@@ -166,7 +161,7 @@ const movimientosDiv = document.getElementById("movimientos");
 const prestamosInfoDiv = document.getElementById("prestamosInfo");
 const listaPrestamos = document.getElementById("listaPrestamos");
 const capacidadPrestamoP = document.getElementById("capacidadPrestamo");
-// Modal préstamo
+
 const prestamoModal = document.getElementById("prestamoModal");
 const cerrarModal = document.getElementById("cerrarModal");
 const formPrestamo = document.getElementById("formPrestamo");
@@ -174,16 +169,40 @@ const montoPrestamo = document.getElementById("montoPrestamo");
 const plazoPrestamo = document.getElementById("plazoPrestamo");
 const btnCancelarPrestamo = document.getElementById("btnCancelarPrestamo");
 
-// Funciones
 
-function iniciarSesion(usuario, contrasena) {
-  return usuario === usuarioCorrecto && contrasena === contrasenaCorrecta;
+function cargarUsuarios() {
+  return fetch('usuarios.json')
+    .then(response => response.json())
+    .then(data => {
+      usuarios = data;
+    })
+    .catch(error => {
+      console.error('Error cargando usuarios:', error);
+    });
 }
 
+async function iniciarSesion(usuario, contrasena) {
+  if (usuarios.length === 0) {
+    await cargarUsuarios();
+  }
+
+  const usuarioEncontrado = usuarios.find(u => u.nombre === usuario && u.contrasena === contrasena);
+  if (usuarioEncontrado) {
+    usuarioActivo = new Usuario(usuarioEncontrado.nombre, usuarioEncontrado.saldo);
+    usuarioActivo.movimientos = usuarioEncontrado.movimientos || [];
+    usuarioActivo.prestamos = usuarioEncontrado.prestamos || [];
+    usuarioActivo.guardarEnStorage();
+    return true;
+  }
+  return false;
+}
+
+// Mostrar saldo
 function mostrarSaldo() {
   saldoP.textContent = `Saldo: $${usuarioActivo.saldo.toFixed(2)}`;
 }
 
+// Mostrar movimientos
 function mostrarMovimientos() {
   movimientosDiv.innerHTML = "";
   if (usuarioActivo.movimientos.length === 0) {
@@ -199,6 +218,7 @@ function mostrarMovimientos() {
   movimientosDiv.appendChild(ul);
 }
 
+// Mostrar préstamos activos
 function mostrarPrestamos() {
   const prestamosActivos = usuarioActivo.getPrestamosActivos();
   const capacidad = usuarioActivo.getCapacidadPrestamo();
@@ -246,13 +266,13 @@ function mostrarPrestamos() {
   prestamosInfoDiv.style.display = "block";
 }
 
-btnLogin.addEventListener("click", () => {
+
+btnLogin.addEventListener("click", async () => {
   const usuario = usuarioInput.value.trim();
   const contrasena = contrasenaInput.value.trim();
 
-  if (iniciarSesion(usuario, contrasena)) {
-    usuarioActivo = new Usuario(usuario, 10000);
-    usuarioActivo.cargarDeStorage();
+  const exito = await iniciarSesion(usuario, contrasena);
+  if (exito) {
     mensajeLogin.textContent = "";
     loginDiv.style.display = "none";
     menuDiv.style.display = "block";
@@ -295,14 +315,12 @@ btnRetirar.addEventListener("click", () => {
   mostrarNotificacion(`Retiro exitoso: $${monto.toFixed(2)}`, "exito");
 });
 
-
 btnPrestamo.addEventListener("click", () => {
   montoPrestamo.value = "";
   plazoPrestamo.value = "";
   prestamoModal.style.display = "flex";
   montoPrestamo.focus();
 });
-
 
 cerrarModal.onclick = btnCancelarPrestamo.onclick = function() {
   prestamoModal.style.display = "none";
