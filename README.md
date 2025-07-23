@@ -6,15 +6,24 @@ Este proyecto es una simulación interactiva de un sistema de **Home Banking**, 
 
 ## ✨ Funcionalidades
 
-- 🔐 Inicio de sesión con usuario y contraseña.
-- 💰 Consulta de saldo.
-- ➕ Depósito de dinero.
-- ➖ Retiro de dinero.
-- 📜 Registro y visualización de últimos movimientos.
+- 🔐 Inicio de sesión con usuario y contraseña (validación contra usuarios.json).
+- 💰 Consulta de saldo en tiempo real.
+- ➕ Depósito de dinero (con validación de monto).
+- ➖ Retiro de dinero (con validación de monto y fondos).
+- 📜 Registro y visualización de todos los movimientos (depósitos, retiros, préstamos, pagos de cuotas).
 - 🧠 Uso de función constructora para representar al usuario.
-- 💾 Persistencia de datos mediante `localStorage`.
-- 👨‍💻 Interfaz web basada en DOM (sin prompts ni alerts tradicionales).
+- 💾 Persistencia de datos mediante `localStorage` (el usuario mantiene su estado aunque recargue la página).
+- 👨‍💻 Interfaz web dinámica basada en DOM (sin prompts ni alerts tradicionales, todo en la página).
 - 🎨 Estilo básico, limpio y responsivo con CSS.
+- 🏦 Préstamos personales:
+  - Solicitud de préstamo (con validación de monto, plazo y capacidad máxima).
+  - Visualización de préstamos activos.
+  - Pago de cuotas de préstamo.
+  - Cálculo automático de intereses y cuotas.
+  - Capacidad máxima de préstamo (3x el saldo actual).
+- 🔔 Notificaciones visuales para errores, éxitos y advertencias.
+- 🪟 Modal para solicitud de préstamo.
+- 🚪 Cierre de sesión seguro.
 
 ---
 
