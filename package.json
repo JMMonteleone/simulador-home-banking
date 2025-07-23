@@ -1,0 +1,24 @@
+{
+  "name": "simulador-home-banking",
+  "version": "1.0.0",
+  "description": "Este proyecto es una simulación interactiva de un sistema de **Home Banking**, desarrollado con **HTML, CSS y JavaScript puro**, como parte de una práctica educativa para aprender programación web moderna y dinámica.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node servidos.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JMMonteleone/simulador-home-banking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JMMonteleone/simulador-home-banking/issues"
+  },
+  "homepage": "https://github.com/JMMonteleone/simulador-home-banking#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
