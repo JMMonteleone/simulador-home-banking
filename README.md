@@ -53,6 +53,7 @@ El proyecto utiliza [SweetAlert2](https://sweetalert2.github.io/) para mostrar n
 
 ## 🗂️ Estructura del proyecto
 
+```
 📁 simulador-home-banking/
 ├── index.html # Página principal
 ├── style.css # Estilos visuales
@@ -61,7 +62,7 @@ El proyecto utiliza [SweetAlert2](https://sweetalert2.github.io/) para mostrar n
 ├── usuarios.json # Datos de usuarios
 ├── package.json # Configuración de Node.js y dependencias
 └── README.md # Documentación del proyecto
-
+```
 ---
 
 ## 🧠 Conceptos aplicados
