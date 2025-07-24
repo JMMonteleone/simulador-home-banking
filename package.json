@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/JMMonteleone/simulador-home-banking#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "serve": "^14.2.4"
   }
 }

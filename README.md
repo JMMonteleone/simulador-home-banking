@@ -21,7 +21,7 @@ Este proyecto es una simulación interactiva de un sistema de **Home Banking**, 
   - Pago de cuotas de préstamo.
   - Cálculo automático de intereses y cuotas.
   - Capacidad máxima de préstamo (3x el saldo actual).
-- 🔔 Notificaciones visuales para errores, éxitos y advertencias.
+- 🔔 Notificaciones visuales para errores, éxitos y advertencias (usando SweetAlert2).
 - 🪟 Modal para solicitud de préstamo.
 - 🚪 Cierre de sesión seguro.
 
@@ -32,9 +32,22 @@ Este proyecto es una simulación interactiva de un sistema de **Home Banking**, 
 - **HTML5** – Estructura de la interfaz.
 - **CSS3** – Estilización visual.
 - **JavaScript (ES6+)** – Lógica, interacción con el usuario, eventos, almacenamiento local y control de estado.
-- **Node.js** – Entorno de ejecución para el backend.
-- **Express** – Framework para servidor web en Node.js.
 - **pm2** – Gestor de procesos para mantener el servidor activo.
+- **Express** – Framework para servidor web en Node.js.
+- **SweetAlert2** – Librería externa para notificaciones visuales modernas y personalizables.
+
+---
+
+## 📦 Librería externa utilizada: SweetAlert2
+
+El proyecto utiliza [SweetAlert2](https://sweetalert2.github.io/) para mostrar notificaciones visuales modernas y atractivas en lugar de los tradicionales `alert()` o mensajes personalizados en el DOM.
+
+- Se integra mediante CDN en el archivo `index.html`:
+  ```html
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  ```
+- Todas las notificaciones de éxito, error o información se muestran usando `Swal.fire(...)` desde JavaScript.
+- Esto mejora la experiencia de usuario y cumple con el criterio de uso de librería externa.
 
 ---
 
@@ -90,19 +103,19 @@ Este proyecto es una simulación interactiva de un sistema de **Home Banking**, 
 
 ### Mantener el servidor activo con pm2 (opcional, recomendado)
 1. Instala pm2 globalmente (solo la primera vez):
-   ```
-   npm install -g pm2
-   ```
+  ```
+  npm install -g pm2
+  ```
 2. Inicia el servidor con pm2:
-   ```
-   pm2 start servidos.js
-   ```
+  ```
+  pm2 start servidos.js
+  ```
 3. El servidor seguirá corriendo aunque cierres la terminal o Visual Studio Code.
 4. Comandos útiles de pm2:
-   - Ver procesos: `pm2 list`
-   - Detener: `pm2 stop servidos`
-   - Reiniciar: `pm2 restart servidos`
-   - Eliminar: `pm2 delete servidos`
+  - Ver procesos: `pm2 list`
+  - Detener: `pm2 stop servidos`
+  - Reiniciar: `pm2 restart servidos`
+  - Eliminar: `pm2 delete servidos`
 
 ---
 
