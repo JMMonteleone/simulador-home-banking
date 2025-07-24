@@ -118,24 +118,18 @@ function Usuario(nombre, saldoInicial) {
   };
 }
 
-// Sistema de notificaciones
+
 function mostrarNotificacion(mensaje, tipo = 'info') {
-  const notificacion = document.getElementById('notificacion');
-  notificacion.textContent = mensaje;
-  notificacion.className = `notificacion ${tipo}`;
-
-  setTimeout(() => {
-    notificacion.classList.add('mostrar');
-  }, 100);
-
-  setTimeout(() => {
-    notificacion.classList.remove('mostrar');
-
-    setTimeout(() => {
-      notificacion.textContent = '';
-      notificacion.className = 'notificacion';
-    }, 300);
-  }, 3000);
+  let icon = 'info';
+  if (tipo === 'exito') icon = 'success';
+  else if (tipo === 'error') icon = 'error';
+  Swal.fire({
+    icon: icon,
+    title: tipo === 'exito' ? 'Éxito' : tipo === 'error' ? 'Error' : 'Info',
+    text: mensaje,
+    timer: 2000,
+    showConfirmButton: false
+  });
 }
 
 // Variables globales y elementos DOM
